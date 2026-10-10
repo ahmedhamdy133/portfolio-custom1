@@ -5,7 +5,7 @@ export default defineConfig({
   base: '/portfolio-custom1/',
   plugins: [react()],
   server: {
-    port: 5173,
+    port: 8080,
     host: true
   }
 });
