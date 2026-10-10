@@ -1,0 +1,325 @@
+/* ==========================================================================
+   SIGNATURE ROBOTICS EXPERIENCE // GLOBAL DESIGN SYSTEM
+   ========================================================================== */
+
+:root {
+  /* Color Palette Tokens */
+  --bg-graphite: #0B0F14;
+  --bg-graphite-translucent: rgba(11, 15, 20, 0.88);
+  --section-navy: #121B26;
+  --section-navy-elevated: #182332;
+  --surface-card: rgba(18, 27, 38, 0.7);
+  --surface-card-hover: rgba(26, 39, 56, 0.85);
+  --surface-card-active: rgba(33, 49, 70, 0.95);
+  
+  /* Accent & Glow Tokens */
+  --accent-cyan: #00D5FF;
+  --accent-cyan-rgb: 0, 213, 255;
+  --accent-cyan-glow: rgba(0, 213, 255, 0.35);
+  --accent-cyan-soft: rgba(0, 213, 255, 0.12);
+  --accent-amber: #FFB300;
+  --accent-crimson: #FF3B5C;
+  --accent-emerald: #00E699;
+  
+  /* Text & Line Tokens */
+  --text-snow: #E9F1F8;
+  --text-secondary: #8E9AA8;
+  --text-muted: #576574;
+  --border-subtle: rgba(142, 154, 168, 0.22);
+  --border-accent: rgba(0, 213, 255, 0.45);
+  --border-accent-strong: rgba(0, 213, 255, 0.8);
+  
+  /* Typography Tokens */
+  --font-display: 'Orbitron', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-tech: 'Rajdhani', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Fluid Spacing & Sizes */
+  --container-max: 1380px;
+  --header-height: 72px;
+  --section-padding: clamp(64px, 8vw, 128px);
+  
+  /* Shadows & Glassmorphism */
+  --glass-bg: rgba(18, 27, 38, 0.65);
+  --glass-border: 1px solid rgba(0, 213, 255, 0.2);
+  --glass-blur: blur(14px);
+  --shadow-hud: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 213, 255, 0.15);
+  --shadow-glow: 0 0 25px rgba(0, 213, 255, 0.4);
+  
+  /* Transitions */
+  --transition-fast: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Base Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-body);
+  background-color: var(--bg-graphite);
+  color: var(--text-snow);
+  scroll-behavior: auto; /* Managed by Lenis */
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-graphite);
+  color: var(--text-snow);
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Blueprint Grid Background Pattern */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(142, 154, 168, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(142, 154, 168, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Vignette & Ambient Radial Glow */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 20%, rgba(0, 213, 255, 0.05) 0%, transparent 70%),
+              radial-gradient(circle at 50% 80%, rgba(18, 27, 38, 0.8) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-snow);
+  line-height: 1.15;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw + 1rem, 5rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.5vw + 0.5rem, 3.2rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2vw + 0.2rem, 1.8rem);
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: clamp(0.95rem, 1vw + 0.2rem, 1.125rem);
+  font-weight: 400;
+}
+
+/* Accessible Focus Styling */
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 4px;
+  box-shadow: 0 0 12px var(--accent-cyan);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-graphite);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+}
+
+/* Glassmorphic Card Utility */
+.glass-panel {
+  background: var(--surface-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  position: relative;
+  transition: all var(--transition-smooth);
+}
+
+.glass-panel:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-hud);
+}
+
+/* Blueprint Corner Crosshairs */
+.blueprint-box {
+  position: relative;
+}
+.blueprint-box::before,
+.blueprint-box::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--accent-cyan);
+  pointer-events: none;
+}
+.blueprint-box::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--accent-cyan);
+  border-left: 2px solid var(--accent-cyan);
+}
+.blueprint-box::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--accent-cyan);
+  border-right: 2px solid var(--accent-cyan);
+}
+
+/* Section Wrapper */
+.section-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Telemetry Badge */
+.telemetry-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  background: rgba(0, 213, 255, 0.08);
+  border: 1px solid var(--border-accent);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.telemetry-badge .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* High-tech Button */
+.btn-cyber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-family: var(--font-tech);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(0, 213, 255, 0.12);
+  color: var(--text-snow);
+  border: 1px solid var(--border-accent);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.btn-cyber:hover {
+  background: var(--accent-cyan);
+  color: #05080c;
+  box-shadow: 0 0 20px var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+.btn-cyber-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-family: var(--font-tech);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--text-snow);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+}
+
+.btn-cyber-outline:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  background: rgba(0, 213, 255, 0.05);
+}
+
+/* Scanline Overlay (Optional Visual Layer) */
+.scanlines {
+  position: relative;
+}
+.scanlines::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  background-size: 100% 3px, 4px 100%;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
